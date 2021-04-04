@@ -7,14 +7,10 @@ namespace Components
     {
         public float MovementSpeed;
 
-        public float MaxMovementSpeed;
-
         public float RotationSpeed;
 
         public float JumpUpwardsSpeed;
 
-        public float MaxSlope;
-
-        public int MaxIterations;
+        public InputMovement InputMovement;
     }
 }

@@ -7,7 +7,7 @@ using static Unity.Physics.PhysicsStep;
 
 namespace Entities
 {
-    [AddComponentMenu("PetProject / Entities / Player ")]
+    [AddComponentMenu("PetProject/Entities/PlayerEntity ")]
     internal class PlayerEntity : MonoBehaviour, IConvertGameObjectToEntity
     {
         public Vector2 Velocity;
@@ -47,18 +47,13 @@ namespace Entities
                 Value = transform.rotation,
             });
 
-            dstManager.AddComponentData<MovementComponent>(entity, new MovementComponent 
+            dstManager.AddComponentData<MovementComponent>(entity, new MovementComponent
             {
                 MovementSpeed = MovementSpeed,
-                MaxMovementSpeed = MaxMovementSpeed,
                 RotationSpeed = RotationSpeed,
                 JumpUpwardsSpeed = JumpUpwardsSpeed,
-                MaxSlope = MaxSlope,
-                MaxIterations = MaxIterations,
+                InputMovement = new InputMovement(),
             });
-
-            dstManager.AddComponentData<InputMovement>(entity: entity, componentData: new InputMovement());
-            dstManager.AddComponentData<InputAbility>(entity: entity, componentData: new InputAbility());
         }
     }
 }

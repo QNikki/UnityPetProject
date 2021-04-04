@@ -4,41 +4,55 @@ using Unity.Transforms;
 using Components;
 using Unity.Burst;
 using Unity.Collections;
+using Unity.Jobs;
 
 namespace Systems
 {
-    public class InputMovementSystem : SystemBase
+    [BurstCompile]
+    [UpdateAfter(typeof(InputSystem))]
+    public struct InputMovementSystem : ISystemBase
     {
         private EntityQuery _queryEntities;
 
-        protected override void OnCreate()
+        public void OnCreate(ref SystemState state)
         {
             // Cached access to a set of ComponentData based on a specific query
-            _queryEntities = GetEntityQuery(new EntityQueryDesc
+            _queryEntities = state.GetEntityQuery(new EntityQueryDesc
             {
                 All = new ComponentType[]
                 {
                     typeof(Translation),
-                    typeof(Components.InputMovement),
-                    typeof(Components.InputAbility),
-                    typeof(Components.VelocityComponent),
                     typeof(Rotation),
+                    typeof(MovementComponent),
                 }
             });
         }
 
-        protected override void OnUpdate()
+        public void OnUpdate(ref SystemState state)
         {
             if (_queryEntities.CalculateEntityCount() == 0) 
             {
+                UnityEngine.Debug.Log("0");
                 return;
             }
 
-            NativeArray<ArchetypeChunk> chunks = _queryEntities.CreateArchetypeChunkArray(Allocator.TempJob);
+            ComponentTypeHandle<Rotation> handleRotation = state.GetComponentTypeHandle<Rotation>();
+            ComponentTypeHandle<Translation> handleTranslation = state.GetComponentTypeHandle<Translation>();
+            ComponentTypeHandle<MovementComponent> handleMove = state.GetComponentTypeHandle<MovementComponent>();
 
+            Jobs.MovementJob job = new Jobs.MovementJob
+            {
+                MovementType = handleMove,
+                TranslationType = handleTranslation,
+                RotationType = handleRotation,
+
+                DeltaTime = state.Time.DeltaTime,
+            };
+
+            state.Dependency = job.ScheduleParallel(_queryEntities, 1, state.Dependency);
         }
 
-        protected override void OnDestroy()
+        public void OnDestroy(ref SystemState state)
         {
         }
     }

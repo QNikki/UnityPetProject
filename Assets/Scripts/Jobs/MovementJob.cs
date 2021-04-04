@@ -11,15 +11,32 @@ namespace Jobs
     [BurstCompile]
     struct MovementJob : IJobEntityBatch
     {
-        [ReadOnly] public ComponentTypeHandle<MovementComponent> MovementType;
+        public ComponentTypeHandle<MovementComponent> MovementType;
         public ComponentTypeHandle<Translation> TranslationType;
-        public ComponentTypeHandle<Velocity> VelocityType;
         public ComponentTypeHandle<Rotation> RotationType;
-        public ComponentTypeHandle<InputMovement> InputMovementType;
+        public float DeltaTime;
 
         public void Execute(ArchetypeChunk batchInChunk, int batchIndex)
         {
-            NativeArray<Translation> translations = batchInChunk.GetNativeArray<Translation>();
+            NativeArray<Translation> translations = batchInChunk.GetNativeArray(TranslationType);
+            NativeArray<Rotation> rotations = batchInChunk.GetNativeArray(RotationType);
+            NativeArray<MovementComponent> movements = batchInChunk.GetNativeArray(MovementType);
+
+            for (int batch = 0; batch < batchInChunk.Count; batch++)
+            {
+                Translation translation = translations[batch];
+                Rotation rotation = rotations[batch];
+                MovementComponent movementComp = movements[batch];
+
+                Move(movementComp.InputMovement, movementComp, translation);
+            }
         }
+
+        private void Move(InputMovement input, MovementComponent movement, Translation translation)
+        {
+            float3 moveDirection = math.forward() * input.Movement.y + math.right() * input.Movement.x;
+            translation.Value += moveDirection * movement.MovementSpeed * DeltaTime;
+        }
+
     }
 }

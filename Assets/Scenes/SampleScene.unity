@@ -818,9 +818,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1697341485}
-  - component: {fileID: 1697341486}
   - component: {fileID: 1697341488}
-  - component: {fileID: 1697341487}
+  - component: {fileID: 1697341486}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -852,68 +851,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1697341484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 254e6a96966df5e44b3ae120f0886374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 64c398bf36315bd47a990c93b8ed773e,
-    type: 3}
-  m_NotificationBehavior: 3
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 84f069c9-cd14-4609-b60e-d36ebc9ecb62
-    m_ActionName: PlayerCtrl/LeftClick[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cae28fb7-26bb-4ae9-bd42-e68d2fb885ba
-    m_ActionName: PlayerCtrl/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ec033599-347c-4a13-9f7e-d0b949334a89
-    m_ActionName: PlayerCtrl/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 6d6b0dd0-6d2d-4a61-a56e-69d5fc4963ce
-    m_ActionName: PlayerCtrl/Ability1[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 99f46d49-6f19-443e-a812-ab8fd454b48f
-    m_ActionName: PlayerCtrl/Ability2[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: afcb0bae-1ae5-4548-93a9-f9823465c178
-    m_ActionName: PlayerCtrl/Jump[/Keyboard/space]
-  m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: PlayerInput
-  m_DefaultActionMap: PlayerInput
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 963194227}
---- !u!114 &1697341487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697341484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3c52fb437bbd4544b382dc64fce37ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Velocity:
-    x: 1
-    y: 1
-  AngularVelocity: 1
+  Velocity: {x: 0, y: 0}
+  DegreesPerSecond: 0
+  Gravity:
+    x: -0
+    y: -9.81
+    z: -0
+  MovementSpeed: 2.5
+  MaxMovementSpeed: 10
+  RotationSpeed: 2.5
+  JumpUpwardsSpeed: 5
+  MaxSlope: 60
+  MaxIterations: 10
 --- !u!114 &1697341488
 MonoBehaviour:
   m_ObjectHideFlags: 0

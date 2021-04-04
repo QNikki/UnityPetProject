@@ -1,4 +1,5 @@
 ﻿using Components;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,7 +9,6 @@ using UnityEngine.InputSystem;
 namespace Systems
 {
     [AlwaysUpdateSystem]
-    [UpdateInGroup(typeof(InitializationSystemGroup))]
     public partial class InputSystem : SystemBase, PCContrlos.IPlayerInputActions
     {
         private PCContrlos _inputActions;
@@ -105,6 +105,23 @@ namespace Systems
                 LeftHand = _leftHand,
                 RightHand = _rightHand,
             });
+        }
+    }
+
+    [UpdateAfter(typeof(InputSystem))]
+    public partial class MovementOneTwoManySystem : SystemBase
+    {
+        protected override void OnUpdate()
+        {
+            InputMovement input = GetSingleton<InputMovement>();
+            Entities
+                .WithName("MovementOneTwoManySystemJob")
+                .WithBurst()
+                .ForEach((ref MovementComponent moveComp) =>
+                {
+                    moveComp.InputMovement = input;
+                }
+                ).ScheduleParallel();
         }
     }
 }

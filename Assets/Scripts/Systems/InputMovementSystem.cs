@@ -10,50 +10,28 @@ namespace Systems
 {
     [BurstCompile]
     [UpdateAfter(typeof(InputSystem))]
-    public struct InputMovementSystem : ISystemBase
+    public partial class InputMovementSystem : SystemBase
     {
-        private EntityQuery _queryEntities;
-
-        public void OnCreate(ref SystemState state)
+        protected override void OnUpdate()
         {
-            // Cached access to a set of ComponentData based on a specific query
-            _queryEntities = state.GetEntityQuery(new EntityQueryDesc
-            {
-                All = new ComponentType[]
+            // Grab our DeltaTime out of the system so it is usable by the ForEach lambda
+            var deltaTime = Time.DeltaTime;
+
+            // For simple systems that only run a single job and don't need to access the JobHandle themselves,
+            // it can be omitted from the Entities.ForEach() call. The job will implicitly use the system's
+            // Dependency handle as its input dependency, and update the system's Dependency property to contain the scheduled
+            // job's handle.
+            Entities
+                .WithName("MovePlayer")// ForEach name is helpful for debugging
+                .ForEach((
+                    ref Translation translation, // "ref" keyword makes this parameter ReadWrite
+                    in MovementComponent movement) =>
                 {
-                    typeof(Translation),
-                    typeof(Rotation),
-                    typeof(MovementComponent),
-                }
-            });
-        }
-
-        public void OnUpdate(ref SystemState state)
-        {
-            if (_queryEntities.CalculateEntityCount() == 0) 
-            {
-                UnityEngine.Debug.Log("0");
-                return;
-            }
-
-            ComponentTypeHandle<Rotation> handleRotation = state.GetComponentTypeHandle<Rotation>();
-            ComponentTypeHandle<Translation> handleTranslation = state.GetComponentTypeHandle<Translation>();
-            ComponentTypeHandle<MovementComponent> handleMove = state.GetComponentTypeHandle<MovementComponent>();
-
-            Jobs.MovementJob job = new Jobs.MovementJob
-            {
-                MovementType = handleMove,
-                TranslationType = handleTranslation,
-                RotationType = handleRotation,
-
-                DeltaTime = state.Time.DeltaTime,
-            };
-
-            state.Dependency = job.ScheduleParallel(_queryEntities, 1, state.Dependency);
-        }
-
-        public void OnDestroy(ref SystemState state)
-        {
+                    translation.Value += new float3(
+                        movement.InputMovement.Movement.x,
+                        0.0f,
+                         movement.InputMovement.Movement.y) * 3 * deltaTime;
+                }).ScheduleParallel(); // Schedule the ForEach with the job system to run
         }
     }
 }

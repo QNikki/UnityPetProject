@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6495526188138903059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3625038941419649179}
+  - component: {fileID: 8136564978753715048}
+  - component: {fileID: 2666951101157931912}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3625038941419649179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495526188138903059}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8136564978753715048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495526188138903059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99111b559a440d5bedf970e0e9a0687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2666951101157931912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6495526188138903059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cde417a5719442c93663e307bd2542a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IgnoredEntities: []
+  Camera:
+    RotationSpeed: 1
+    MaxVAngle: 89
+    MinVAngle: -89
+    RotateWithCharacterParent: 0
+    TargetDistance: 5
+    MinDistance: 0
+    MaxDistance: 10
+    DistanceMovementSpeed: 50
+    DistanceMovementSharpness: 20
+    ObstructionRadius: 0.1
+    ObstructionInnerSmoothingSharpness: 3.4028235e+38
+    ObstructionOuterSmoothingSharpness: 5
+    PreventFixedUpdateJitter: 1
+    CurrentDistanceFromMovement: 0
+    CurrentDistanceFromObstruction: 0
+    PitchAngle: 0
+    PlanarForward:
+      x: 0
+      y: 0
+      z: 0

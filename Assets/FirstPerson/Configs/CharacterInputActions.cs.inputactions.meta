@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 387bea1d42a8ae345a7811847431c2d7
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8404be70184654265930450def6a9037, type: 3}
+  generateWrapperCode: 1
+  wrapperCodePath: Assets/FirstPerson/Scripts/Misc/CharacterInputActions.cs.cs
+  wrapperClassName: CharacterInputActions
+  wrapperCodeNamespace: FP.Core.Character

@@ -1,4 +1,4 @@
-﻿namespace BoardGame.Components
+﻿namespace BoardGame.HexGrid
 {
 	public enum TileType 
 	{

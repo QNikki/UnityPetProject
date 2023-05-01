@@ -1,14 +1,13 @@
 ﻿using Unity.Entities;
 
-namespace BoardGame.Components
+namespace BoardGame.HexGrid
 {
 	internal struct HexGridComponent : IComponentData
 	{
-		public Entity Prefab;
+		public Entity Prefab { get; set; }
 
-		public int CountX;
-
-		public int CountY;
+		public int CountX { get; set; }
+		
+		public int CountY { get; set; }
 	}
-
 }

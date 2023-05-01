@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 
-namespace BoardGame.Components
+namespace BoardGame.HexGrid
 {
 
 	public struct TileComponent: IComponentData
